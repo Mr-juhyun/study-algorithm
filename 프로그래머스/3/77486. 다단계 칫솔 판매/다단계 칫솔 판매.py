@@ -1,26 +1,24 @@
 from math import trunc
 def solution(enroll, referral, seller, amount):
-    
+
     relation = {enroll[i]:referral[i] for i in range(len(enroll))}
     pay = {name:0 for name in enroll}
 
-    
     def profits(name,offer_to):
         
-        if relation[name] != '-' and offer_to != 0:
-            for_up = trunc(offer_to*0.1)
-            pay[relation[name]] += offer_to - for_up
-            profits(relation[name],for_up)
+        if relation[name] != '-' and offer_to > 0:
+            
+            up_name = relation[name]
+            pay[up_name] += offer_to - trunc(offer_to*0.1)
+            
+            profits(up_name,trunc(offer_to*0.1))               
 
             
-    for i in range(len(seller)):
-            seller_name = seller[i]
-            seller_amount = amount[i] * 100
-            
-            offer_to = trunc(seller_amount*0.1)
-            pay[seller_name] += seller_amount-offer_to
-            
-            profits(seller_name, offer_to)
+    for name,pcs in zip(seller,amount):
+        money = pcs*100
+        offer_to = trunc(money*0.1)
+        pay[name] += money - offer_to
+        
+        profits(name,offer_to)
 
-    
     return list(pay.values())
