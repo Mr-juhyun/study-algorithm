@@ -9,7 +9,7 @@ def solution(jobs):
             process_time += start[1]
         except:
             start = min(jobs) 
-            process_time = start[0]+start[1]
+            process_time = sum(start)
         time.append(process_time - start[0])
         jobs.remove(start)
     
