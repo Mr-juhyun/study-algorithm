@@ -1,21 +1,18 @@
-from heapq import heapify, heappop,heappush
 def solution(jobs):
     process_time = min(jobs)[0]
-    jobs = [[i[1],i[0]] for i in jobs]
+    jobs = sorted(jobs,key=lambda x:x[1])
     time = []
-    
     for _ in range(len(jobs)):
-        start = list(filter(lambda x:x[1] <= process_time,jobs))
-        heapify(start)
-        
-        if start:
-            minimum = heappop(start)
-            process_time += minimum[0]
-        else:
-            minimum = min(jobs)
-            process_time = sum(minimum)
-            
-        heappush(time,process_time - minimum[1])
-        jobs.remove(minimum)
-
+        x = 0
+        for disk in jobs:
+            if disk[0] <= process_time:
+                process_time += disk[1]
+                x = 1
+                break
+        if x == 0:
+            disk = min(jobs)
+            process_time = sum(disk)
+        time.append(process_time - disk[0])   
+        jobs.remove(disk)
+    
     return sum(time)//len(time)
