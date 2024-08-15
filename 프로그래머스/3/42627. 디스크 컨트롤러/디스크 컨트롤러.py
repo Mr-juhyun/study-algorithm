@@ -1,20 +1,30 @@
 def solution(jobs):
-    process_time = 0
-    result_time = 0
     length = len(jobs)
-    jobs = sorted(jobs,key=lambda x:x[1])
-    for _ in range(length):
+    process_time = min(jobs)[0]
+    jobs.sort(key = lambda x:x[1])
+    jobs = {i:t for i,t in enumerate(jobs)}
+    time = 0
+    for _ in range(len(jobs)):
         x = 0
-        for disk in jobs:
-            if disk[0] <= process_time:
-                process_time += disk[1]
+        for key in jobs:
+            if jobs[key][0] <= process_time:
+                process_time += jobs[key][1]
                 x = 1
                 break
         if x == 0:
-            disk = min(jobs)
-            process_time = sum(disk)
-            
-        result_time += process_time - disk[0]
-        jobs.remove(disk)
-        
-    return result_time//length
+            key = min(jobs,key=lambda x:jobs[x][0])
+            process_time = sum(jobs[key])
+        time += process_time - jobs[key][0] 
+        jobs.pop(key)
+    
+    return time // length
+
+
+
+
+
+
+
+
+
+
