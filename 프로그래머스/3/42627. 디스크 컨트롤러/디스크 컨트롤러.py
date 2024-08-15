@@ -14,5 +14,8 @@ def solution(jobs):
             process_time = sum(disk)
         time.append(process_time - disk[0])   
         jobs.remove(disk)
-    
+        xxxxx=11111111111
+        yyyyyy=111111111
+        for i in range(xxxxx):
+            print(i)
     return sum(time)//len(time)
