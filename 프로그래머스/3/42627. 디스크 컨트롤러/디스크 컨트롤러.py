@@ -4,7 +4,7 @@ def solution(jobs):
     jobs.sort(key = lambda x:x[1])
     jobs = {i:t for i,t in enumerate(jobs)}
     time = 0
-    for _ in range(len(jobs)):
+    for _ in range(len(jobs)+10000):
         x = 0
         for key in jobs:
             if jobs[key][0] <= process_time:
