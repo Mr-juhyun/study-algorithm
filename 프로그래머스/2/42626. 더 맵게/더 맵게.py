@@ -27,14 +27,6 @@ class Scoville:
             heapq.heappush(self.sco, new)
             
         return  self.count
-    
-    
-    
-    
-    
-    
-    
-    
 
 def solution(scoville, k):
     sco = Scoville(scoville, k)
