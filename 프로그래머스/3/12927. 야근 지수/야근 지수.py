@@ -3,8 +3,7 @@ def solution(n, works):
     if sum(works) <= n:
         return 0
     answer = 0
-    works = Counter(works)
-    max_work = max(works)
+    max_work = max(works := Counter(works))
     while n >0:
         target = works.pop(max_work) 
         if target > n:
