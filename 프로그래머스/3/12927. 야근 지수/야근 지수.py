@@ -1,23 +1,27 @@
-from collections import Counter
+from collections import defaultdict, OrderedDict
 def solution(n, works):
-    if sum(works) <= n:
+    work = defaultdict(int)
+    total = 0
+    answer= 0
+    for i in works:
+        work[i] += 1
+        total += i
+        
+    if total <= n:
         return 0
     
-    answer = 0
-    max_work = max(works := Counter(works))
-    while n >0:
-        target = works.pop(max_work) 
+    max_work = max(work)
+    while n:
+        target = work.pop(max_work) 
         if target > n:
-            works[max_work] = target-n
-            works[max_work-1] += n
+            work[max_work] = target-n
+            work[max_work-1] += n
             break
-        else:
-            n -= target
-            works[max_work-1] += target
-            max_work -= 1
-            
-    for work in works:
-        answer += work**2 * works[work]
+        n -= target
+        work[max_work-1] += target
+        max_work -= 1
+    for idx in work:
+        answer += idx**2 * work[idx]
     return answer
 
 
