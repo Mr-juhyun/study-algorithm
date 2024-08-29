@@ -1,13 +1,10 @@
-from heapq import heapify, heappop, heappush
 def solution(A, B):
-    heapify(A)
-    heapify(B)
+    B.sort()
+    A.sort()
+    idx = 0
     answer = 0
-    while B:
-        target_a = heappop(A)
-        target_b = heappop(B)
-        if target_b > target_a:
+    for b in B:
+        if b > A[idx]: 
             answer += 1
-        else:
-            heappush(A,target_a)
+            idx += 1
     return answer
