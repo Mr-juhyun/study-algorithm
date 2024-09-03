@@ -2,7 +2,7 @@ def solution(n, info):
     
     def differ(ryan, apeach):
         diff = 0
-        for idx in range(len(info)):
+        for idx in range(len(info)-1):
             score = 10 - idx
             if ryan[idx] > apeach[idx]:
                 diff += score
