@@ -23,16 +23,14 @@ def solution(n, info):
     for ryan in ryans_score:
         if sum(ryan) <= n:
             ryan[-1] += (n - sum(ryan))
+            ryan.append(differ(ryan,info))
             ryans.append(ryan)
 
-    for ryan in ryans:
-        ryan.append(differ(ryan, info))
-        
     max_ryan = max(ryans, key=lambda x: x[-1])
+    if max_ryan[-1] <= 0:
+        return [-1]
+    
     answer = list(filter(lambda x:x[-1] == max_ryan[-1],ryans))
     answer.sort(key=lambda x: x[::-1],reverse=True)
-    answer = answer[0]
     
-    if answer[-1] <= 0:
-        return [-1]
-    return answer[:-1]
+    return answer[0][:-1]
