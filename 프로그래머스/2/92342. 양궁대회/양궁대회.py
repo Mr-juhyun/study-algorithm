@@ -9,7 +9,7 @@ def solution(n, info):
             diff = ryan_shot.pop()
             if idx == 10:
                 if diff >= max_difference: 
-                    temp.append(ryan_shot[1:] + [ryan_shot[0]]+[diff])
+                    temp.append(ryan_shot + [ryan_shot[0]]+[diff])
                     max_difference = diff
             else:
                 if apeach_shot > 0:
@@ -27,4 +27,4 @@ def solution(n, info):
     ryan_score.sort(key=lambda x: x[::-1],reverse=True)
     if not ryan_score or ryan_score[0].pop() <= 0:
         return [-1]
-    return ryan_score[0]
+    return ryan_score[0][1:]
