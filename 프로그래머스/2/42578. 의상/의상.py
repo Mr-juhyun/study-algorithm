@@ -1,5 +1,4 @@
 from collections import Counter
-from itertools import combinations
 def solution(clothes):
     answer = 1
     clothes = Counter(clothes:= [cloth[1] for cloth in clothes])
