@@ -1,26 +1,31 @@
+class BestAlbum:
+    def __init__(self,play,num):
+        self.play = play
+        self.num = num
+
+    def __lt__(self,other):
+        if self.play == other.play:
+            return self.num > other.num
+        return self.play < other.play
+    
 from collections import defaultdict
+
 def solution(genres, plays):
-    album = defaultdict(list)
-    play_each = defaultdict(int)
     answer = []
+    genre_playtime = {}
+    album = defaultdict(list)
     
-    for i,gen in enumerate(genres):
-        temp = plays[i]
-        album[gen].append([temp,i])
-        play_each[gen] += temp
-        
-    play_each = sorted(play_each.items(),key=lambda x:x[1],reverse = True)
+    for idx,gen in enumerate(genres):
+        genre_playtime[gen] = genre_playtime.get(gen,0) + plays[idx]
+        album[gen].append(BestAlbum(plays[idx],idx))
     
-    for genre,_ in play_each:
-        best_song = album[genre]
-        best_song.sort(key=lambda x:(x[0],-x[1]))
-        
-        first = best_song.pop()
-        answer.append(first[1])
-        
-        if best_song:
-            second = best_song.pop()
-            answer.append(second[1])
-            
+    genres = sorted(genre_playtime.items(),key=lambda x:-x[1])
+    
+    for gen,_ in genres:
+        song = album[gen]
+        song.sort()
+        answer.append(song.pop().num)
+        if song:
+            answer.append(song.pop().num)
     return answer
 
