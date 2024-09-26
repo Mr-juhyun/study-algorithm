@@ -29,3 +29,6 @@ def solution(genres, plays):
             answer.append(song.pop().num)
     return answer
 
+
+
+
