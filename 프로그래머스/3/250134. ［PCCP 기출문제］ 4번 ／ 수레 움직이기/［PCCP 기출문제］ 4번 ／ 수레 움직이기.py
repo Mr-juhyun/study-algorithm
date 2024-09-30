@@ -22,7 +22,6 @@ def solution(maze):
         
         if now == end:
             color.append(path)
-            return
         
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         for y, x in directions:
