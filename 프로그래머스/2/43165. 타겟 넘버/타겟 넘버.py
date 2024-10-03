@@ -1,9 +1,12 @@
+from collections import deque
 def solution(numbers, target):
+    numbers = deque(numbers)
     answer = [0]
-    for num in numbers:
+    while numbers:
+        num = numbers.popleft()
         temp = []
-        for cal in answer:
-            temp.append(cal + num)
-            temp.append(cal - num)
+        for i in answer:
+            temp += [i+num]
+            temp += [i-num]
         answer = temp
     return answer.count(target)
