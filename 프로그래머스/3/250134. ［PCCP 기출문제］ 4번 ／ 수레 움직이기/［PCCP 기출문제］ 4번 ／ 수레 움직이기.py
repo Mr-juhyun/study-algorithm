@@ -18,7 +18,7 @@ def solution(maze):
 
     red_paths = [] 
     blue_paths = [] 
-    def bfs(now, end, color, path):
+    def find_paths(now, end, color, path):
         
         if now == end:
             color.append(path)
@@ -29,10 +29,10 @@ def solution(maze):
             nx = now[1] + x
             
             if 0 <= ny < rows and 0 <= nx < cols and [ny, nx] not in path and [ny, nx] not in walls:
-                bfs([ny, nx], end, color, path + [[ny, nx]])
+                find_paths([ny, nx], end, color, path + [[ny, nx]])
                 
-    bfs(red_start, red_end, red_paths, [red_start])
-    bfs(blue_start, blue_end, blue_paths, [blue_start])
+    find_paths(red_start, red_end, red_paths, [red_start])
+    find_paths(blue_start, blue_end, blue_paths, [blue_start])
     
     if not red_paths or not blue_paths:
         return 0
