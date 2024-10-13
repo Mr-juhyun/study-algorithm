@@ -7,11 +7,9 @@ class Log:
         return self.start <= end_time and self.end >= start_time
         
 from datetime import datetime, timedelta
-from collections import deque
-
 def solution(lines):
     
-    log_list = deque()
+    log_list = []
     
     for line in lines:
         _, end, run_time = line.split(' ')
@@ -21,11 +19,10 @@ def solution(lines):
         
     max_req = 0
     
-    while log_list:
-        now = log_list.popleft()
+    for now in log_list:
         start_time = now.end
         end_time = start_time + timedelta(seconds = 0.999)
-        req = 1
+        req = 0
         
         for log in log_list:
             if log.run(start_time,end_time):
