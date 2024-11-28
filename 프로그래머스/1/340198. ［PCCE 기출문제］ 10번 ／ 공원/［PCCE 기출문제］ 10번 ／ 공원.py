@@ -1,9 +1,9 @@
 class mat_in_park():
-    def __init__(self,park):
+    def __init__(self,park,mat_size):
         self.park = park
         self.park_row = len(park)
         self.park_col = len(park[0])
-        self.mat_size = 0
+        self.mat_size = mat_size
 
     def find_mat(self,row,col):
         for y in range(self.mat_size):
@@ -12,7 +12,7 @@ class mat_in_park():
                     return False
         return True
                 
-    def park_size(self):
+    def __call__(self):
         for row in range(self.park_row - self.mat_size + 1):
             for col in range(self.park_col - self.mat_size + 1):
                 if self.find_mat(row,col):
@@ -20,10 +20,8 @@ class mat_in_park():
         return False
                     
 def solution(mats, park):
-    p = mat_in_park(park)
     mats.sort(reverse=True)
     for mat_size in mats:
-        p.mat_size = mat_size
-        if p.park_size():
+        if mat_in_park(park,mat_size)():
             return mat_size
     return -1
