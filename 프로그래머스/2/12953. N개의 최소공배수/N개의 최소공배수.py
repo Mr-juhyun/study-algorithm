@@ -1,18 +1,13 @@
-def find_LCM(x,y):
-        if x == 1 or y == 1:
-            return x*y
-        for i in range(2,min([x,y])+1):
-            f = divmod(x,i)
-            s = divmod(y,i)
-            if f[1] == 0 and s[1] == 0:
-                return i * find_LCM(f[0],s[0])
-        return x*y
-    
+def mod(x,y):
+    a = min(x,y)
+    b = max(x,y)
+    if a == 0:
+        return b
+    return mod(a,b%a)
+
 def solution(arr):
-    while len(arr) > 1:
-        x = arr.pop()
-        y = arr.pop()
-        LCM = find_LCM(x,y)
-        arr.append(LCM)
+    lcm = arr[0]
+    for n in arr[1:]:
+        lcm = lcm*n//mod(lcm,n)
         
-    return arr[0]
+    return lcm
