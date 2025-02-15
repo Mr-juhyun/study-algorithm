@@ -14,16 +14,14 @@ def solution(schedules, timelogs, startday):
             m = "0" + m
             
         go_to_work = int(h + m)
-        check = True
         
         for timelog in timelogs[idx]:
             if day <= 5:
                 if timelog > go_to_work:
-                    check = False
                     break
                     
             day += 1
             if day > 7: day = 1
                 
-        if check: answer += 1
+        else: answer += 1 
     return answer
