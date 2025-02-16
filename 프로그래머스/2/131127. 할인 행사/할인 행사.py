@@ -6,7 +6,7 @@ def solution(want, number, discount):
     want = {want[i]:number[i] for i in range(len(want))}
     
     while len(dis_lst) == 10:
-        if want == dict(Counter(dis_lst)):
+        if want == Counter(dis_lst):
             answer += 1
         s += 1
         dis_lst = discount[s:s+10]
